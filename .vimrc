@@ -43,7 +43,7 @@ set expandtab       "将Tab自动转化为空格
 
 " ====================设置标签自动匹配=====================
 :inoremap ( ()<esc>i
-:inoremap { {}<esc><esc>i
+:inoremap { {}<esc>i
 :inoremap " ""<esc>i
 :inoremap ' ''<esc>i
 :inoremap [ []<esc>i
