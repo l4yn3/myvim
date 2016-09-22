@@ -10,59 +10,41 @@ set encoding=utf-8
 set fencs=utf-8,gbk,gbk2312,cp936,latin-1
 set fileformat=unix
 set fileformats=unix,mac,dos
-set nu
-set relativenumber
+set nu              "开启显示行号
+set relativenumber      "开启显示相对行号
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 language messages zh_CN.utf-8
 
 
-set nobackup
-set noswapfile
-set noundofile
+set ai!                      " 设置自动缩进
+set smartindent              " 智能自动缩进
 
-set shiftwidth=4
-set tabstop=4
 
-set autoindent
-set ruler
-set laststatus=2
-set autoread
-set list
+set nobackup        "不生成备份文件
+set noswapfile      "不生成交换文件
+set noundofile      "不生成未完成文件
+
+"设置通用缩进格式
+set shiftwidth=4    "设置>缩进时4个空格        
+set tabstop=4       "设置tab缩进时4个空格
+
+set autoindent      "设置自动对齐
+set ruler           "右下角显示光标位置的状态行
+set laststatus=2    "开启状态栏信息
+set autoread        "当文件在外部被修改时自动更新该文件
+set list            " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
 set listchars=tab:\~\ ,trail:.
 
-syntax enable
-syntax on
+syntax enable       "打开语法高亮
+syntax on           "打开文件类型检测
 
-set expandtab
+set expandtab       "将Tab自动转化为空格
 
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
-endfunction
-
+" ====================设置标签自动匹配=====================
+:inoremap ( ()<esc>i
+:inoremap { {}<esc><esc>i
+:inoremap " ""<esc>i
+:inoremap ' ''<esc>i
+:inoremap [ []<esc>i
+:inoremap kj  <esc>
