@@ -43,8 +43,26 @@ set expandtab       "将Tab自动转化为空格
 
 " ====================设置标签自动匹配=====================
 :inoremap ( ()<esc>i
-:inoremap { {}<esc>i
+:inoremap { {}<esc><esc>i
 :inoremap " ""<esc>i
 :inoremap ' ''<esc>i
 :inoremap [ []<esc>i
 :inoremap kj  <esc>
+
+"加载插件管理器
+execute pathogen#infect()
+
+" ================== 设置快捷键 ===========================
+let mapleader="/"
+let g:mapleader="/"
+"'rc命令打开配置文件
+nmap <leader>rc <esc>:e $MYVIMRC<cr>
+"'tb打开tagbar
+nmap <leader>tb :TagbarToggle<cr>
+let g:tagbar_width=25
+
+"nerdtree插件显示隐藏文件
+let g:NERDTreeShowHidden = 1
+"启用NERDTree插件
+nmap <leader>nt :NERDTree<cr>
+
