@@ -1,3 +1,10 @@
+if(has('win32') || has ('win64'))
+    let g:is_win=1
+elseif(has('unix'))
+    let g:is_unix=1
+elseif(has('mac'))
+    let g:is_mac=1
+endif
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
@@ -49,15 +56,16 @@ set expandtab       "将Tab自动转化为空格
 :inoremap [ []<esc>i
 :inoremap kj  <esc>
 
+
 "加载插件管理器
 execute pathogen#infect()
 
 " ================== 设置快捷键 ===========================
 let mapleader="/"
 let g:mapleader="/"
-"'rc命令打开配置文件
+"rc命令打开配置文件
 nmap <leader>rc <esc>:e $MYVIMRC<cr>
-"'tb打开tagbar
+"tb打开tagbar
 nmap <leader>tb :TagbarToggle<cr>
 let g:tagbar_width=25
 
@@ -65,4 +73,11 @@ let g:tagbar_width=25
 let g:NERDTreeShowHidden = 1
 "启用NERDTree插件
 nmap <leader>nt :NERDTree<cr>
+
+"ho打开hosts文件
+if g:is_win
+    nmap <leader>ho <esc>:e C:\windows\system32\drivers\etc\hosts<cr>
+else
+    nmap <leader>ho <esc>e: ~/profile/etc/hosts
+endif
 
